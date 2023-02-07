@@ -7,9 +7,9 @@ import (
 )
 
 type Homework struct {
-	ID       int    `json:"id"`
-	taskName string `json:"name"`
-	Status   bool   `json:"status"`
+	ID     int    `json:"id"`
+	Title  string `json:"title"`
+	Status bool   `json:"status"`
 }
 
 func main() {
@@ -22,10 +22,15 @@ func main() {
 	})
 
 	app.Post("/api/homeworks", func(c *fiber.Ctx) error {
-		hw := &Homework{}
+		hw := Homework{}
+
+		if err := c.BodyParser(&hw); err != nil {
+			return err
+		}
+
 		hw.ID = len(hwList)
 		hw.Status = false
-		hwList = append(hwList, *hw)
+		hwList = append(hwList, hw)
 		return c.JSON(hwList)
 	})
 
