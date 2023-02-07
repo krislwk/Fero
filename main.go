@@ -1,19 +1,19 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"log"
 )
 
 type Homework struct {
-	ID     int    `json:"id"`
-	Title  string `json:"title"`
-	Status bool   `json:"status"`
+	ID      int    `json:"id"`
+	Title   string `json:"title"`
+	Body    string `json: "body"`
+	DueDate string `json: "duedate"` //Format: DD/MM/YYYY
+	Status  bool   `json:"status"`
 }
 
 func main() {
-	fmt.Println("Hello World!")
 	app := fiber.New()
 	hwList := []Homework{}
 
@@ -21,7 +21,7 @@ func main() {
 		return c.SendString("OK")
 	})
 
-	app.Post("/api/homeworks", func(c *fiber.Ctx) error {
+	app.Post("/api/add", func(c *fiber.Ctx) error {
 		hw := Homework{}
 
 		if err := c.BodyParser(&hw); err != nil {
@@ -31,6 +31,24 @@ func main() {
 		hw.ID = len(hwList)
 		hw.Status = false
 		hwList = append(hwList, hw)
+		return c.JSON(hwList)
+	})
+
+	app.Patch("/api/changestatus/:id/:done", func(c *fiber.Ctx) error {
+		id, err := c.ParamsInt("id")
+		var done string = c.Params("done")
+
+		if err != nil {
+			return c.Status(401).SendString("Invalid ID")
+		}
+
+		for i, hw := range hwList {
+			if hw.ID == id {
+				hwList[i].Status = (done == "done")
+				break
+			}
+		}
+
 		return c.JSON(hwList)
 	})
 
