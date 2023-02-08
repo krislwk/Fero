@@ -1,2 +1,2 @@
 # Fero
-Open-source RESTful To-do List Web Application
+RESTful To-do List Web Application
