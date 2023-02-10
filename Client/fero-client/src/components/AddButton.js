@@ -8,7 +8,13 @@ function AddButton() {
     }
 
     return(
-        <button onClick={clickHandler}>Add</button>
+        <div class = "grid place-items-center h-screen flex flex-col items-center justify-center">
+            <button
+                className="text-white font-semibold w-24 h-9 border-2 border-sky-500/100 rounded-full bg-sky-500/100"
+                onClick={clickHandler}>
+                Add
+            </button>
+        </div>
     )
 }
 
