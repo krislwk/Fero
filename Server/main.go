@@ -1,18 +1,14 @@
 package main
 
 import (
+	"Fero/Classes"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"log"
 )
 
-type Homework struct {
-	ID      int    `json:"id"`
-	Title   string `json:"title"`
-	Body    string `json: "body"`
-	DueDate string `json: "duedate"` //Format: DD/MM/YYYY
-	Status  bool   `json:"status"`
-}
+// Type Defs
+type Homework = Classes.Homework
 
 func main() {
 	app := fiber.New()
