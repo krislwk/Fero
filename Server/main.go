@@ -2,6 +2,7 @@ package main
 
 import (
 	"Fero/Classes"
+	"database/sql"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"log"
@@ -12,6 +13,8 @@ type Homework = Classes.Homework
 
 func main() {
 	app := fiber.New()
+	db, err := sql.Open("sqlite3", "./homeworks.db")
+
 	hwList := []Homework{}
 
 	app.Use(cors.New(cors.Config{

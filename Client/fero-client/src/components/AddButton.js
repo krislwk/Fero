@@ -10,9 +10,9 @@ function AddButton() {
     return(
         <div class = "grid place-items-center h-screen flex flex-col items-center justify-center">
             <button
-                className="text-white font-semibold w-24 h-9 border-2 border-sky-500/100 rounded-full bg-sky-500/100"
+                className="text-white font-semibold w-24 h-9 border-2 border-[#447dbd] rounded-md bg-[#447dbd]"
                 onClick={clickHandler}>
-                Add
+                Add Task
             </button>
         </div>
     )
